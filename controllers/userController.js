@@ -11,11 +11,20 @@ let addUser = async (req, res) => {
     // await data.save();
 
     let data = await Users.create({
-        name: 'Test2',
-        email: 'test3@gmail.com',
-        gender: 'Femel',
+        name: 'Test',
+        email: 'test5@gmail.com',
+        gender: 'male',
 
     })
+    // console.log(data.dataValues);
+
+    //data update
+    // data.name = 'dummy';
+    // data.save();
+
+    // delete
+    data.destroy();
+    console.log(data.dataValues);
 
     let response = {
         data: 'Ok',
