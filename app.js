@@ -11,6 +11,7 @@ app.get('/', (req, res) => {
 
 app.get('/add', userController.addUser);
 app.get('/crud', userController.crudOperation);
+app.get('/query', userController.queryData);
 
 app.listen(PORT, () => {
     console.log(`app is running at http://localhost:${PORT}`);
