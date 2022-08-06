@@ -1,4 +1,5 @@
 const { Sequelize, DataTypes, Op } = require('sequelize');
+const { users } = require('../models');
 const db = require('../models');
 console.log(db.users);
 const Users = db.users;
@@ -166,9 +167,29 @@ let queryData = async (req, res, next) => {
 }
 
 let findData = async (rew, res, next) => {
+    // let data = await users.findAll({})
+    // let data = await users.findOne({})
+    // let data = await users.findByPk(4);
+    // let data = await users.findAndCountAll({
+    //     where: {
+    //         email: "test1@gmail.com"
+    //     }
+    // });
+
+    let [data, created] = await users.findOrCreate({
+        where: {
+            name: "dummy1"
+        },
+        defaults: {
+            email: "dummy1@gmail.com",
+            gender: "male",
+        }
+    })
+
 
     let response = {
-        data: "finder",
+        data: data,
+        add: created,
     }
     res.status(200).json(response);
 }
