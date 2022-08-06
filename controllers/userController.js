@@ -178,10 +178,10 @@ let findData = async (rew, res, next) => {
 
     let [data, created] = await users.findOrCreate({
         where: {
-            name: "dummy1"
+            name: "dummy2"
         },
         defaults: {
-            email: "dummy1@gmail.com",
+            email: "dummy2@gmail.com",
             gender: "male",
         }
     })
