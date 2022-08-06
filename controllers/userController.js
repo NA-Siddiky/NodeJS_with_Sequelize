@@ -165,9 +165,17 @@ let queryData = async (req, res, next) => {
     res.status(200).json(response)
 }
 
+let findData = async (rew, res, next) => {
+
+    let response = {
+        data: "finder",
+    }
+    res.status(200).json(response);
+}
 
 module.exports = {
     addUser,
     crudOperation,
-    queryData
+    queryData,
+    findData
 }
