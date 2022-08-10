@@ -1,11 +1,11 @@
 const { Sequelize, DataTypes, Op } = require('sequelize');
 const { users } = require('../models');
 const db = require('../models');
+
 console.log(db.users);
 const Users = db.users;
 
-let addUser = async (req, res) => {
-
+const addUser = async (req, res) => {
     // let data = await Users.build({
     //     name: 'Test',
     //     email: 'test2@gmail.com'
@@ -20,22 +20,20 @@ let addUser = async (req, res) => {
     // })
     // console.log(data.dataValues);
 
-    //data update
+    // data update
     // data.name = 'dummy';
     // data.save();
 
     // delete
     // data.destroy();
 
-
-    let response = {
+    const response = {
         data: 'Ok addUser',
-    }
-    res.status(200).json(response)
-}
+    };
+    res.status(200).json(response);
+};
 
-let crudOperation = async (req, res, next) => {
-
+const crudOperation = async (req, res, next) => {
     // INSERT
     // let data = await Users.create({
     //     name: 'Test Crud',
@@ -54,7 +52,7 @@ let crudOperation = async (req, res, next) => {
     //     }
     // )
 
-    //UPDATE
+    // UPDATE
     // let data2 = await Users.update(
     //     { name: 'Update Name', email: "update@gmail.com" },
     //     {
@@ -64,14 +62,14 @@ let crudOperation = async (req, res, next) => {
     //     },
     // )
 
-    //DELETE
+    // DELETE
     // let data3 = await Users.destroy({
     //     where: {
     //         id: 6,
     //     }
     // })
 
-    //Delete All
+    // Delete All
     // let data = await Users.destroy({
     //     truncate: true,
     // })
@@ -100,19 +98,18 @@ let crudOperation = async (req, res, next) => {
     //     }
     // ])
 
-    //find
+    // find
     // let data = await Users.findAll({})
     // let datas = await Users.findOne({})
 
-
-    let response = {
+    const response = {
         data: 'Ok CRUD',
         // data: datas,
-    }
-    res.status(200).json(response)
-}
+    };
+    res.status(200).json(response);
+};
 
-let queryData = async (req, res, next) => {
+const queryData = async (req, res, next) => {
     // let data = await Users.findOne({});
     // let data = await Users.findAll({
     //     attributes: [
@@ -134,8 +131,8 @@ let queryData = async (req, res, next) => {
     //     },
     // })
 
-    //conditions
-    let data = await Users.findAll({
+    // conditions
+    const data = await Users.findAll({
         where: {
             // id: 2,
             // id: {
@@ -153,20 +150,18 @@ let queryData = async (req, res, next) => {
             // ],
             group: ['email', 'name'],
             limit: 2,
-            offset: 1
-        }
-    })
+            offset: 1,
+        },
+    });
 
-
-
-    let response = {
+    const response = {
         // data: 'Ok queryData',
-        data: data,
-    }
-    res.status(200).json(response)
-}
+        data,
+    };
+    res.status(200).json(response);
+};
 
-let findData = async (rew, res, next) => {
+const findData = async (rew, res, next) => {
     // let data = await users.findAll({})
     // let data = await users.findOne({})
     // let data = await users.findByPk(4);
@@ -176,37 +171,36 @@ let findData = async (rew, res, next) => {
     //     }
     // });
 
-    let [data, created] = await users.findOrCreate({
+    const [data, created] = await users.findOrCreate({
         where: {
-            name: "dummy2"
+            name: 'dummy2',
         },
         defaults: {
-            email: "dummy2@gmail.com",
-            gender: "male",
-        }
-    })
+            email: 'dummy2@gmail.com',
+            gender: 'male',
+        },
+    });
 
-
-    let response = {
-        data: data,
+    const response = {
+        data,
         add: created,
-    }
+    };
     res.status(200).json(response);
-}
+};
 
-var setterGetter=async (req, res)=>{
+const setterGetter = async (req, res) => {
     // let data = await users.create({name:'siddiky',email:'test1', gender:'Mail'})
-    let data = await Users.findAll({});
-    let response={
-        data: data
-    }
+    const data = await Users.findAll({});
+    const response = {
+        data,
+    };
     res.status(200).json(response);
-}
+};
 
 module.exports = {
     addUser,
     crudOperation,
     queryData,
     findData,
-    setterGetter
-}
+    setterGetter,
+};
