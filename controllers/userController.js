@@ -12,13 +12,13 @@ let addUser = async (req, res) => {
     // })
     // await data.save();
 
-    let data = await Users.create({
-        name: 'Test',
-        email: 'test5@gmail.com',
-        gender: 'male',
+    // let data = await Users.create({
+    //     name: 'Test',
+    //     email: 'test5@gmail.com',
+    //     gender: 'male',
 
-    })
-    console.log(data.dataValues);
+    // })
+    // console.log(data.dataValues);
 
     //data update
     // data.name = 'dummy';
@@ -194,9 +194,19 @@ let findData = async (rew, res, next) => {
     res.status(200).json(response);
 }
 
+var setterGetter=async (req, res)=>{
+    // let data = await users.create({name:'siddiky',email:'test1', gender:'Mail'})
+    let data = await Users.findAll({});
+    let response={
+        data: data
+    }
+    res.status(200).json(response);
+}
+
 module.exports = {
     addUser,
     crudOperation,
     queryData,
-    findData
+    findData,
+    setterGetter
 }

@@ -1,19 +1,19 @@
 const express = require('express');
+const { addUser, crudOperation, queryData, findData, setterGetter } = require('./controllers/userController');
 const app = express();
 
 const PORT = 6060;
 require('./models')
-let userController = require('./controllers/userController');
 
 app.get('/', (req, res) => {
     res.send("Home Page");
 });
 
-app.get('/add', userController.addUser);
-app.get('/crud', userController.crudOperation);
-app.get('/query', userController.queryData);
-app.get('/finder', userController.findData);
-
+app.get('/add', addUser);
+app.get('/crud', crudOperation);
+app.get('/query', queryData);
+app.get('/finder', findData);
+app.get("/setter-getter", setterGetter)
 
 app.listen(PORT, () => {
     console.log(`app is running at http://localhost:${PORT}`);
