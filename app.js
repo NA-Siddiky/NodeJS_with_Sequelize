@@ -5,6 +5,7 @@ const {
     queryData,
     findData,
     setterGetter,
+    ValidationCount,
 } = require('./controllers/userController');
 
 const app = express();
@@ -21,6 +22,7 @@ app.get('/crud', crudOperation);
 app.get('/query', queryData);
 app.get('/finder', findData);
 app.get('/setter-getter', setterGetter);
+app.get('/validation', ValidationCount);
 
 app.listen(PORT, () => {
     console.log(`app is running at http://localhost:${PORT}`);

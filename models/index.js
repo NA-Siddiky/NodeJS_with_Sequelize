@@ -1,28 +1,32 @@
 const { Sequelize, DataTypes } = require('sequelize');
-const sequelize = new Sequelize("all-sequelize", "root", "12345678", {
-    host: "localhost",
-    dialect: "mysql",
+
+const sequelize = new Sequelize('all-sequelize', 'root', '12345678', {
+    host: 'localhost',
+    dialect: 'mysql',
     logging: false,
     pool: { max: 5, min: 0, idle: 10000 },
 });
 
-sequelize.authenticate()
+sequelize
+    .authenticate()
     .then(() => {
-        console.log("connected");
+        console.log('connected');
     })
-    .catch(err => {
-        console.log("Error" + err);
-    })
+    .catch((err) => {
+        console.log(`Error${err}`);
+    });
 
 const db = {};
 db.Sequelize = Sequelize;
 db.sequelize = sequelize;
+db.sequelize.sync({ force: false, match: /all-sequelize$/ }).then(() => {
+    console.log('ReSync Successfully');
+});
 db.users = require('./users')(sequelize, DataTypes);
-console.log(db.users);
 
-db.sequelize.sync({ force: false })
-    .then(() => {
-        console.log("ReSync Successfully");
-    })
+console.log(db.users);
+// db.sequelize.sync({ force: false }).then(() => {
+//     console.log('ReSync Successfully');
+// });
 
 module.exports = db;

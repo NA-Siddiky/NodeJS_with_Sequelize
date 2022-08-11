@@ -161,7 +161,7 @@ const queryData = async (req, res, next) => {
     res.status(200).json(response);
 };
 
-const findData = async (rew, res, next) => {
+const findData = async (req, res, next) => {
     // let data = await users.findAll({})
     // let data = await users.findOne({})
     // let data = await users.findByPk(4);
@@ -197,10 +197,42 @@ const setterGetter = async (req, res) => {
     res.status(200).json(response);
 };
 
+const ValidationCount = async (req, res) => {
+    try {
+        const data = await users.create({ name: 'siddiky13', email: 'test13', gender: 'male' });
+    } catch (error) {
+        const messages = {};
+        error.errors.forEach((e) => {
+            let message;
+            // switch (e.validatorKey) {
+            //     case 'not_unique':
+            //         message = 'Duplicate Value';
+            //         break;
+            //     case 'equals':
+            //         console.log(error.message);
+            //         message = 'not match';
+            //         break;
+            //     case 'isIn':
+            //         message = 'gender is not match';
+            //         break;
+            // }
+            message = e.message;
+            messages[e.path] = message;
+            console.log(error, messages);
+        });
+    }
+
+    const response = {
+        data: 'check',
+    };
+    res.status(200).json(response);
+};
+
 module.exports = {
     addUser,
     crudOperation,
     queryData,
     findData,
     setterGetter,
+    ValidationCount,
 };
