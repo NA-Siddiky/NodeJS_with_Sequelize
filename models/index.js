@@ -3,7 +3,7 @@ const { Sequelize, DataTypes } = require('sequelize');
 const sequelize = new Sequelize('all-sequelize', 'root', '12345678', {
     host: 'localhost',
     dialect: 'mysql',
-    logging: false,
+    logging: true,
     pool: { max: 5, min: 0, idle: 10000 },
 });
 

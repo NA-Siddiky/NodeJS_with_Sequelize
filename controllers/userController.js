@@ -1,4 +1,6 @@
-const { Sequelize, DataTypes, Op } = require('sequelize');
+const {
+ Sequelize, DataTypes, Op, QueryTypes 
+} = require('sequelize');
 const { users } = require('../models');
 const db = require('../models');
 
@@ -199,7 +201,7 @@ const setterGetter = async (req, res) => {
 
 const ValidationCount = async (req, res) => {
     try {
-        const data = await users.create({ name: 'siddiky13', email: 'test13', gender: 'male' });
+        // const data = await users.create({ name: 'siddiky7', email: 'test7', gender: 'male' });
     } catch (error) {
         const messages = {};
         error.errors.forEach((e) => {
@@ -223,11 +225,21 @@ const ValidationCount = async (req, res) => {
     }
 
     const response = {
-        data: 'check',
+        data: 'validation check',
     };
     res.status(200).json(response);
 };
 
+const rawQuery = async (req, res) => {
+    const users = await db.sequelize.query('Select * from users', {
+        type: QueryTypes.SELECT,
+    });
+    const response = {
+        data: 'Raw Query',
+        record: users,
+    };
+    res.status(200).json(response);
+};
 module.exports = {
     addUser,
     crudOperation,
@@ -235,4 +247,5 @@ module.exports = {
     findData,
     setterGetter,
     ValidationCount,
+    rawQuery,
 };

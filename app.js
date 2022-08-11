@@ -6,6 +6,7 @@ const {
     findData,
     setterGetter,
     ValidationCount,
+    rawQuery,
 } = require('./controllers/userController');
 
 const app = express();
@@ -23,6 +24,7 @@ app.get('/query', queryData);
 app.get('/finder', findData);
 app.get('/setter-getter', setterGetter);
 app.get('/validation', ValidationCount);
+app.get('/raw-query', rawQuery);
 
 app.listen(PORT, () => {
     console.log(`app is running at http://localhost:${PORT}`);
