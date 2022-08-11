@@ -1,3 +1,4 @@
+const { raw } = require('body-parser');
 const {
  Sequelize, DataTypes, Op, QueryTypes 
 } = require('sequelize');
@@ -231,8 +232,19 @@ const ValidationCount = async (req, res) => {
 };
 
 const rawQuery = async (req, res) => {
-    const users = await db.sequelize.query('Select * from users', {
+    // const users = await db.sequelize.query('Select * from users where gender IN(:gender)',
+
+    // const users = await db.sequelize.query('Select * from users where email LIKE(:searchEmail)',
+
+    const users = await db.sequelize.query('Select * from users where gender = $gender ', {
         type: QueryTypes.SELECT,
+        // model: Users,
+        // mapToModel:true,
+        // raw: true,
+        // replacements: { gender: 'male' },
+        // replacements: { gender: ['male', 'female'] },
+        // replacements: { searchEmail: '@gmail.com' },
+        bind: { gender: 'male' },
     });
     const response = {
         data: 'Raw Query',
