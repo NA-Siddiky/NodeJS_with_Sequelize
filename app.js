@@ -8,6 +8,7 @@ const {
     ValidationCount,
     rawQuery,
     oneToOne,
+    belongsTo,
 } = require('./controllers/userController');
 
 const app = express();
@@ -27,6 +28,7 @@ app.get('/setter-getter', setterGetter);
 app.get('/validation', ValidationCount);
 app.get('/raw-query', rawQuery);
 app.get('/oneToOne', oneToOne);
+app.get('/belongsTo', belongsTo);
 
 app.listen(PORT, () => {
     console.log(`app is running at http://localhost:${PORT}`);
