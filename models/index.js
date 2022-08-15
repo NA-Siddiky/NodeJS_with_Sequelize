@@ -3,7 +3,7 @@ const { Sequelize, DataTypes } = require('sequelize');
 const sequelize = new Sequelize('all-sequelize', 'root', '12345678', {
     host: 'localhost',
     dialect: 'mysql',
-    logging: true,
+    // logging: true,
     pool: { max: 5, min: 0, idle: 10000 },
 });
 
@@ -23,8 +23,13 @@ db.sequelize.sync({ force: false, match: /all-sequelize$/ }).then(() => {
     console.log('ReSync Successfully');
 });
 db.users = require('./users')(sequelize, DataTypes);
+db.posts = require('./posts')(sequelize, DataTypes);
 
-console.log(db.users);
+// relations of DB;
+db.users.hasOne(db.posts);
+db.posts.belongsTo(db.users);
+// console.log(db.users);
+// console.log(db.posts);
 // db.sequelize.sync({ force: false }).then(() => {
 //     console.log('ReSync Successfully');
 // });

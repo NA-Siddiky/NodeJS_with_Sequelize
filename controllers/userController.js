@@ -1,12 +1,11 @@
 const { raw } = require('body-parser');
-const {
- Sequelize, DataTypes, Op, QueryTypes 
-} = require('sequelize');
-const { users } = require('../models');
+const { Sequelize, DataTypes, Op, QueryTypes } = require('sequelize');
+const { users, posts } = require('../models');
 const db = require('../models');
 
-console.log(db.users);
+// console.log(db.users);
 const Users = db.users;
+const Posts = db.posts;
 
 const addUser = async (req, res) => {
     // let data = await Users.build({
@@ -252,6 +251,11 @@ const rawQuery = async (req, res) => {
     };
     res.status(200).json(response);
 };
+
+var oneToOne = async (req, res, next) => {
+    const data = await Users.findAll({});
+    res.status(200).json(data);
+};
 module.exports = {
     addUser,
     crudOperation,
@@ -260,4 +264,5 @@ module.exports = {
     setterGetter,
     ValidationCount,
     rawQuery,
+    oneToOne,
 };
