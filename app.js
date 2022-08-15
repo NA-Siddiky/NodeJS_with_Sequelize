@@ -9,6 +9,7 @@ const {
     rawQuery,
     oneToOne,
     belongsTo,
+    oneToMany,
 } = require('./controllers/userController');
 
 const app = express();
@@ -28,6 +29,7 @@ app.get('/setter-getter', setterGetter);
 app.get('/validation', ValidationCount);
 app.get('/raw-query', rawQuery);
 app.get('/oneToOne', oneToOne);
+app.get('/oneToMany', oneToMany);
 app.get('/belongsTo', belongsTo);
 
 app.listen(PORT, () => {

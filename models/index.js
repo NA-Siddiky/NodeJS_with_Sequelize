@@ -26,12 +26,17 @@ db.users = require('./users')(sequelize, DataTypes);
 db.posts = require('./posts')(sequelize, DataTypes);
 
 // relations of DB;
-db.users.hasOne(db.posts, {
+// db.users.hasOne(db.posts, {
+//     foreignKey: 'user_id',
+//     as: 'postDetail',
+// });
+db.users.hasMany(db.posts, {
     foreignKey: 'user_id',
     as: 'postDetail',
 });
 db.posts.belongsTo(db.users, {
     foreignKey: 'user_id',
+    as: 'userInfo',
 });
 // console.log(db.users);
 // console.log(db.posts);

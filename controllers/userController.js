@@ -1,7 +1,5 @@
 const { raw } = require('body-parser');
-const {
- Sequelize, DataTypes, Op, QueryTypes 
-} = require('sequelize');
+const { Sequelize, DataTypes, Op, QueryTypes } = require('sequelize');
 const { users, posts } = require('../models');
 const db = require('../models');
 
@@ -276,9 +274,27 @@ var belongsTo = async (req, res) => {
         include: [
             {
                 model: Users,
+                as: 'userInfo',
                 attributes: ['name', 'email'],
             },
         ],
+    });
+    res.status(200).json(data);
+};
+
+var oneToMany = async (req, res) => {
+    const data = await Users.findAll({
+        attributes: ['name', 'email'],
+        include: [
+            {
+                model: Posts,
+                as: 'postDetail',
+                attributes: ['title', ['name', 'PostName']],
+            },
+        ],
+        where: {
+            id: 1,
+        },
     });
     res.status(200).json(data);
 };
@@ -292,4 +308,5 @@ module.exports = {
     rawQuery,
     oneToOne,
     belongsTo,
+    oneToMany,
 };
