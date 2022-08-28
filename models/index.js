@@ -45,10 +45,10 @@ db.posts.belongsTo(db.users, {
 });
 
 db.posts.belongsToMany(db.tags, {
-    through: 'post_tag',
+    // through: 'Post_Tag',
 });
 db.tags.belongsToMany(db.posts, {
-    through: 'post_tag',
+    // through: 'Post_Tag',
 });
 
 // console.log(db.users);
