@@ -1,11 +1,19 @@
+/* eslint-disable prettier/prettier */
+/* eslint-disable no-unused-vars */
+/* eslint-disable camelcase */
 const { raw } = require('body-parser');
-const { Sequelize, DataTypes, Op, QueryTypes } = require('sequelize');
-const { users, posts } = require('../models');
+const {
+ Sequelize, DataTypes, Op, QueryTypes,
+} = require('sequelize');
+const {
+ users, posts, tag, posts_tag,
+} = require('../models');
 const db = require('../models');
 
 // console.log(db.users);
 const Users = db.users;
 const Posts = db.posts;
+const Tags = db.tags;
 
 const addUser = async (req, res) => {
     // let data = await Users.build({
@@ -298,6 +306,31 @@ var oneToMany = async (req, res) => {
     });
     res.status(200).json(data);
 };
+
+var manyToMany = async (req, res) => {
+    // -------post to tag---//
+    // const data = await Posts.findAll({
+    //     attributes: ['title', 'content'],
+    //     include: [
+    //         {
+    //             model: Tags,
+    //             attributes: ['name'],
+    //         },
+    //     ],
+    // });
+
+    // tag to post//
+    const data = await Tags.findAll({
+        attributes: ['name'],
+        include: [
+            {
+                model: Posts,
+                attributes: ['title'],
+            },
+        ],
+    });
+    res.status(200).json(data);
+};
 module.exports = {
     addUser,
     crudOperation,
@@ -309,4 +342,5 @@ module.exports = {
     oneToOne,
     belongsTo,
     oneToMany,
+    manyToMany,
 };

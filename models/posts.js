@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 module.exports = (sequelize, DataTypes) => {
     const Posts = sequelize.define(
         'posts',
@@ -10,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
         {
             createdAt: 'created_at',
             updatedAt: 'modified_at',
-        }
+        },
     );
     return Posts;
 };

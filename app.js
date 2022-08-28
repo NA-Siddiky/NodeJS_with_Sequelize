@@ -10,6 +10,7 @@ const {
     oneToOne,
     belongsTo,
     oneToMany,
+    manyToMany,
 } = require('./controllers/userController');
 
 const app = express();
@@ -31,6 +32,7 @@ app.get('/raw-query', rawQuery);
 app.get('/oneToOne', oneToOne);
 app.get('/oneToMany', oneToMany);
 app.get('/belongsTo', belongsTo);
+app.get('/manyToMany', manyToMany);
 
 app.listen(PORT, () => {
     console.log(`app is running at http://localhost:${PORT}`);
