@@ -22,12 +22,11 @@ const addUser = async (req, res) => {
     // })
     // await data.save();
 
-    // let data = await Users.create({
+    // const data = await Users.create({
     //     name: 'Test',
     //     email: 'test5@gmail.com',
     //     gender: 'male',
-
-    // })
+    // });
     // console.log(data.dataValues);
 
     // data update
@@ -331,6 +330,25 @@ var manyToMany = async (req, res) => {
     });
     res.status(200).json(data);
 };
+
+var scopes = async (req, res) => {
+    // const data = 'Scope';
+    // check single scope//
+    // const data = await users.scope('checkStatus').findAll({});
+    const data = await users.scope(['checkStatus', 'checkGender', 'selectUsers', 'limitCheck']).findAll({});
+    // check multiple scope//
+    // const data = await users.scope('checkStatus', 'checkGender').findAll({
+    //     include: [
+    //         {
+    //             model: Users,
+    //             as: 'userInfo',
+    //         },
+    //     ],
+    // });
+    // const data = await users.scope('checkStatus', 'checkGender', 'includePosts').findAll({});
+    res.status(200).json(data);
+};
+
 module.exports = {
     addUser,
     crudOperation,
@@ -343,4 +361,5 @@ module.exports = {
     belongsTo,
     oneToMany,
     manyToMany,
+    scopes,
 };

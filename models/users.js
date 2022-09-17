@@ -27,6 +27,10 @@ module.exports = (sequelize, DataTypes) => {
                 isIn: { args: [['male', 'female']], msg: ' Please select from male/female' },
             },
         },
+        status: {
+            type: DataTypes.INTEGER,
+            // allowNull: false,
+        },
     });
     return Users;
 };
