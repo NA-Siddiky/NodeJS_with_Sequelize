@@ -319,7 +319,7 @@ var manyToMany = async (req, res) => {
     //     ],
     // });
 
-    // tag to post//
+    // ------ tag to post ------//
     const data = await Tags.findAll({
         attributes: ['name'],
         include: [
